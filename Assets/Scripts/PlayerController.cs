@@ -13,6 +13,22 @@ public class PlayerController : MonoBehaviour
 	public float tilt;
 	public Boundary boundary;
 	
+	public GameObject shot;
+	public Transform shotSpawn;
+	public float fireRate;
+	
+	private float nextFire;
+	//Atirar
+	void Update ()
+	{
+		if (Input.GetButton("Fire1") && Time.time > nextFire)
+		{
+			nextFire = Time.time + fireRate;
+			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+			audio.Play ();
+		}
+	}
+	//Movimentar a nave
 	void FixedUpdate ()
 	{
 		float moveHorizontal = Input.GetAxis ("Horizontal");
@@ -27,7 +43,7 @@ public class PlayerController : MonoBehaviour
 				0.0f, 
 				Mathf.Clamp (rigidbody.position.z, boundary.zMin, boundary.zMax)
 				);
-		//faz a nave virar para as laterais
+		
 		rigidbody.rotation = Quaternion.Euler (0.0f, 0.0f, rigidbody.velocity.x * -tilt);
 	}
 }
