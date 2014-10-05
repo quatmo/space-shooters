@@ -10,11 +10,16 @@ public class GameController : MonoBehaviour
 	public float startWait;
 	public float waveWait;
 	
+	public GUIText scoreText;
+	private int score;
+	
 	void Start ()
 	{
+		score = 0;
+		UpdateScore ();
 		StartCoroutine (SpawnWaves ());
 	}
-	//Funçao que sorteia o local que aparecera os asteroids
+	
 	IEnumerator SpawnWaves ()
 	{
 		yield return new WaitForSeconds (startWait);
@@ -22,7 +27,6 @@ public class GameController : MonoBehaviour
 		{
 			for (int i = 0; i < hazardCount; i++)
 			{
-				//Random.Rage vai sortear local que aparecera os asteroids
 				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 				Quaternion spawnRotation = Quaternion.identity;
 				Instantiate (hazard, spawnPosition, spawnRotation);
@@ -30,5 +34,16 @@ public class GameController : MonoBehaviour
 			}
 			yield return new WaitForSeconds (waveWait);
 		}
+	}
+	
+	public void AddScore (int newScoreValue)
+	{
+		score += newScoreValue;
+		UpdateScore ();
+	}
+	
+	void UpdateScore ()
+	{
+		scoreText.text = "Score: " + score;
 	}
 }
