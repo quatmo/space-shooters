@@ -57,7 +57,7 @@ public class Done_GameController : MonoBehaviour
 			
 			if (gameOver)
 			{
-				restartText.text = "Press 'R' for Restart";
+				restartText.text = "Aperte 'R' para reiniciar";
 				restart = true;
 				break;
 			}
@@ -72,12 +72,12 @@ public class Done_GameController : MonoBehaviour
 	
 	void UpdateScore ()
 	{
-		scoreText.text = "Score: " + score;
+		scoreText.text = "Pontos: " + score;
 	}
 	
 	public void GameOver ()
 	{
-		gameOverText.text = "Game Over!";
+		gameOverText.text = "O JOGO ACABOU";
 		gameOver = true;
 	}
 }
